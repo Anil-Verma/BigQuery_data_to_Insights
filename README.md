@@ -30,14 +30,13 @@ This repository is part of my **BigQuery portfolio**, built after completing the
 ✔️ **Data Exploration** with SQL  
 ✔️ **Aggregations & Window Functions**  
 ✔️ **Common Table Expressions (CTEs)**  
-✔️ **Partitioning & Clustering** in BigQuery  
 ✔️ **Optimized Query Writing**  
 
 ---
-
+```bash
 ## 🎯 How to Use This Repository?  
 1️⃣ **Clone the Repository**  
-```bash
+
 git clone https://github.com/Anil-Verma/BigQuery_data_to_Insights.git
 
 2️⃣ Explore SQL Files

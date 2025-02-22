@@ -15,3 +15,29 @@ Use the following names for the returned fields:
     Percentage_Increase_In_Cases
 */
 
+WITH us_cases_by_date AS (
+SELECT
+date,
+SUM(cumulative_confirmed) AS cases
+FROM
+`bigquery-public-data.covid19_open_data.covid19_open_data`
+WHERE
+country_name="United States of America"
+AND date between '2020-03-22' and '2020-04-20'
+GROUP BY
+date
+ORDER BY
+date ASC
+)
+, us_previous_day_comparison AS
+(SELECT
+date,
+cases,
+LAG(cases) OVER(ORDER BY date) AS previous_day,
+cases - LAG(cases) OVER(ORDER BY date) AS net_new_cases,
+(cases - LAG(cases) OVER(ORDER BY date))*100/LAG(cases) OVER(ORDER BY date) AS percentage_increase
+FROM us_cases_by_date
+)
+select Date, cases as Confirmed_Cases_On_Day, previous_day as Confirmed_Cases_Previous_Day, percentage_increase as Percentage_Increase_In_Cases
+from us_previous_day_comparison
+where percentage_increase > 10;
